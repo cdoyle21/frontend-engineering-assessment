@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render TopicByMonthChart component should render TopicByMonthChart component correctly 1`] = `ShallowWrapper {}`;

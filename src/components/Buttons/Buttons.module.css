@@ -1,0 +1,28 @@
+.Buttons {
+    background-color: #e5fd3d;
+    outline: none;
+    cursor: pointer;
+    border: 1px solid #612efb;
+    color: #612efb;
+    font-family: inherit;
+    font-size: 1.2em;
+    padding: 15px 30px;
+    box-shadow: 2px 2px 2px #612efb;
+}
+
+.Buttons:hover, .Buttons:active {
+    background-color: #A0DB41;
+    border: 1px solid #612efb;
+    color: #612efb;
+}
+
+.Buttons:disabled {
+    background-color: #C7C6C6;
+    cursor: not-allowed;
+    border: 1px solid #ccc;
+    color: #888888;
+}
+
+.Buttons:not(:disabled) {
+    animation: enable 0.3s linear;
+}
