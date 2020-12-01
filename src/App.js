@@ -1,13 +1,11 @@
 import Layout from './components/Layout/Layout';
-import TopicByMonth from './containers/TopicByMonth/TopicByMonth';
-import UserProfileTopics from './containers/UserProfileTopics/UserProfileTopics';
+import Charts from './containers/Charts/Charts';
 
 function App() {
   return (
     <div>
       <Layout>
-        <TopicByMonth />
-        <UserProfileTopics />
+        <Charts />
       </Layout>
     </div>
   );

@@ -1,6 +1,6 @@
 import React, { useMemo, useCallback } from 'react';
 import classes from './UserProfileTopicsChart.module.css';
-import Aux from '../../../hoc/Aux';
+import Aux from '../../hoc/Aux';
 import { AreaClosed, Line, Bar } from '@visx/shape';
 import appleStock, { AppleStock } from '@visx/mock-data/lib/mocks/appleStock';
 import { curveMonotoneX } from '@visx/curve';

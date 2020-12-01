@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './TopicByMonthChart.module.css';
-import Aux from '../../../hoc/Aux';
+import Aux from '../../hoc/Aux';
 import { BarGroup } from '@visx/shape';
 import { AxisBottom } from '@visx/axis';
 import { Group } from '@visx/group';
