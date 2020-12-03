@@ -4,60 +4,61 @@ import Aux from '../../hoc/Aux';
 import { BarGroup } from '@visx/shape';
 import { AxisBottom } from '@visx/axis';
 import { Group } from '@visx/group';
-import cityTemperature, { CityTemperature } from '@visx/mock-data/lib/mocks/cityTemperature';
 import { scaleBand, scaleLinear, scaleOrdinal } from '@visx/scale';
-import { timeParse, timeFormat } from 'd3-time-format';
+import { timeParse } from 'd3-time-format';
 
 export type BarGroupProps = {
+  data: any;
   width: number;
   height: number;
   margin?: { top: number; right: number; bottom: number; left: number };
   events?: boolean;
 };
 
-type CityName = 'New York' | 'San Francisco' | 'Austin';
+type Topics = 'potato' | 'community' | 'security' | 'sport' | 'management' | 'fishing' | 'celebrity' | 'wedding' | 'birthday' | 'shopping' ;
 
 const blue = '#aeeef8';
 export const green = '#e5fd3d';
 const purple = '#9caff6';
 export const background = '#612efb';
 
-const data = cityTemperature.slice(0, 8);
-const keys = Object.keys(data[0]).filter(d => d !== 'date') as CityName[];
 const defaultMargin = { top: 40, right: 0, bottom: 40, left: 0 };
 
-const parseDate = timeParse('%Y-%m-%d');
-const format = timeFormat('%b %d');
-const formatDate = (date: string) => format(parseDate(date) as Date);
+export default function TopicByMonthChart({data, width, height, events = false, margin = defaultMargin,}: BarGroupProps) {
 
-// accessors
-const getDate = (d: CityTemperature) => d.date;
+  const posts = data;
+  const keys = posts.id;
+  const topics = posts.likelyTopics.label as Topics[];
 
-// scales
-const dateScale = scaleBand<string>({
-  domain: data.map(getDate),
-  padding: 0.2,
-});
-const cityScale = scaleBand<string>({
-  domain: keys,
-  padding: 0.1,
-});
-const tempScale = scaleLinear<number>({
-  domain: [0, Math.max(...data.map(d => Math.max(...keys.map(key => Number(d[key])))))],
-});
-const colorScale = scaleOrdinal<string, string>({
-  domain: keys,
-  range: [blue, green, purple],
-});
+  const formatDate = timeParse('%Y-%m-%d');
 
-export default function TopicByMonthChart({width, height, events = false, margin = defaultMargin,}: BarGroupProps) {
+  // accessors
+  const getDate = (d: any) => new Date(d.createdAt);
+
+  // scales
+  const dateScale = scaleBand<string>({
+    domain: posts.map(getDate),
+    padding: 0.2,
+  });
+  const topicsScale = scaleBand<string>({
+    domain: keys,
+    padding: 0.1,
+  });
+  const tempScale = scaleLinear<number>({
+    domain: [0, Math.max(...data.map((d: { [x: string]: any; }) => Math.max(...keys.map((key: string | number) => Number(d[key])))))],
+  });
+  const colorScale = scaleOrdinal<string, string>({
+    domain: keys,
+    range: [blue, green, purple],
+  });
+
   // bounds
   const xMax = width - margin.left - margin.right;
   const yMax = height - margin.top - margin.bottom;
 
   // update scale output dimensions
   dateScale.rangeRound([0, xMax]);
-  cityScale.rangeRound([0, dateScale.bandwidth()]);
+  topicsScale.rangeRound([0, dateScale.bandwidth()]);
   tempScale.range([yMax, 0]);
 
   return width < 10 ? null : (
@@ -68,11 +69,11 @@ export default function TopicByMonthChart({width, height, events = false, margin
         <Group top={margin.top} left={margin.left}>
           <BarGroup
             data={data}
-            keys={keys}
+            keys={topics}
             height={yMax}
             x0={getDate}
             x0Scale={dateScale}
-            x1Scale={cityScale}
+            x1Scale={topicsScale}
             yScale={tempScale}
             color={colorScale}
           >
@@ -114,7 +115,6 @@ export default function TopicByMonthChart({width, height, events = false, margin
           })}
         />
       </svg>
-      {console.log(data)}
     </div>
     </Aux>
   );

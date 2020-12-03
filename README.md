@@ -19,52 +19,26 @@ You will also see any lint errors in the console.
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
+## `Brief Summary`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### `Process and Design Choices`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+I began by planning the layout and component tree and state of the application. This involved mapping out where each component would appear on the page; assigning if the component would be stateless or stateful; and then assigning different states that I predicted would be needed for the stateful components.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+To build the application, I first laid out the folder structure I would use placing stateless components in the 'Components' folder and stateful components in the 'Containers' folder.
 
-### `yarn eject`
+Each stateless component would then have a module.css file and a test.js file associated with it. 
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Once the structure of the folders and the components was in place, I created a toggle button to enable users to navigate between the two data charts easily. Here I used the button component within the Charts container as state was used to toggle between charts.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Finally, I integrated the apollo graphql API into the application by using it within the Charts container component. 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### `Challenges faced`
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+I have not worked with visx before and so to begin with had to read up on documents and how to implement the technology. For the majority of the time building the application, I used the mock data provided by visx so that it was easy to visualise how the application was progressing. When using some of the frameworks provided by visx for different graphs, I did notice multiple errors being seen in the console when a chart loaded which I did not get time to investigate. The height of the graphs would also continuously increase causing the graphs to get bigger and bigger when the page was loaded. To prevent this I had to hardcode the height of the graph. Again, with more time, I could have investigated further why this was happening.
 
-## Learn More
+A further challenge I faced before running out of time to submit, was that not all of my unit test have passed in the test suite. I believe this relates to me using module.css and my tests not being able to always find the node or component that they are looking for. I would implement the moduleNameWrapper more effectively to fix this issue in future.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Finally, I couldn't get the API data to fully integrate with the visx graphs which is why, if you run the application, you will receive an error on the page. I believe my Charts container component is setup correctly to handle the API data and the visx graph components are setup correctly to show data which is why they worked with mock data, however I did not manage to get the two to marry up.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+On a last note, if you checkout my last branch 'button_onclick_function' you will be able to see the graphs working with mock data and the toggle button functioning by switching between the two. However, this does not use the API that you provided.
